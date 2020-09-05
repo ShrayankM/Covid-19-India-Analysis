@@ -1,0 +1,76 @@
+html, body {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+}
+
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+#state_hidden{
+    visibility: hidden;
+}
+
+#select-head, #state_select{
+    margin-top: 10px;
+}
+
+.head{
+    background-color: #085597;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+
+#upper{
+    margin-top: 20px;
+}
+
+.pie-caption{
+    font-weight: bold;
+    color: black;
+    font-style: italic;
+}
+
+.pie{
+    /* border: 2px solid black; */
+    width: 100%;
+    height: auto;
+    /* border-radius: 100px; */
+}
+
+.area{
+    width: 100%;
+    /* border: 2px solid black; */
+    height: auto;
+}
+
+
+#bottom{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#decease, #od, #tod, #td{
+    font-weight: bold;
+    text-align: center;
+}
+
+#confirm, #oc, #toc, #tc{
+    color:#D32828;
+    font-weight: bold;
+    text-align: center;
+}
+
+#recover, #or, #tor, #tr{
+    color:#2BA02D;
+    font-weight: bold;
+    text-align: center;
+}

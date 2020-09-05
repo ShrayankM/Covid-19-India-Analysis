@@ -1,0 +1,135 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/temp.css" %}">
+    <title> Coronavirus Statistics India 2020 </title>
+</head>
+
+<body>
+
+    <nav class="head nav justify-content-center col-md-12 col-lg-12">
+        <div class="container">
+            <h1> Coronavirus Statistics India 2020 </h1>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id='upper' class="row">
+            <div class="col-md-6 col-lg-6">
+                <!-- <figure class="figure">
+                    <img src="{% static "images/pie.jpg" %}" class="pie figure-img img-fluid img-thumbnail rounded" alt="...">
+                    <figcaption class="pie-caption figure-caption text-right"> Recovery % of India </figcaption>
+                </figure> -->
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:pie' %}" height="525" width="100%">
+                </iframe>
+                <!-- <img class='pie img-fluid img-thumbnail rounded' src="{% static "images/pie.jpg" %}" alt=""> -->
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="container">
+                    <h2> Across India &#8593;</h2>
+                    {% if overall_list and today_t %}
+                        <table class="tab table table-hover table-borderless table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col"> </th> -->
+                                    <th scope="col" style = "text-align:center"> Confirmed </th>
+                                    <th scope="col" style = "text-align:center"> Recovered </th>
+                                    <th scope="col" style = "text-align:center"> Deceased </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <th scope="row"> Total </th> -->
+                                    <td style="color:#D32828; font-weight:bold; text-align:center"> {{ overall_list.0 }} </td>
+                                    <td style="color:#2BA02D; font-weight:bold; text-align:center"> {{ overall_list.1 }} </td>
+                                    <td style = "font-weight:bold; text-align:center"> {{ overall_list.2 }} </td>
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row"> Today </th> -->
+                                    <td style="color:#D32828; font-weight:bold; text-align:center"> {{ today_t.0 }} &#8593; </td>
+                                    <td style="color:#2BA02D; font-weight:bold; text-align:center"> {{ today_t.1 }} &#8593; </td>
+                                    <td style = "font-weight:bold; text-align:center"> {{ today_t.2 }} &#8593; </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+                <!-- {% if overall_list %}
+                    {% for v in overall_list %}
+                        <p> {{ v }} </p>
+                    {% endfor %}
+                {% endif %} -->
+                <div class="bd-example">
+                <div class="input-group mb-3">
+                    <div id="select-head" class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01"> States Data </label>
+                    </div>
+                    {% if state_table %}
+                    <select id="state_select" class="custom-select" id="inputGroupSelect01">
+                        {% for state in state_table %}
+                        <option value=""> {{ state.name }} </option>
+                        {% endfor %}
+                    </select>
+                    <select id="state_hidden" name="">
+                        {% for state in state_table %}
+                        <option value=""> {{ state.name }} {{ state.c }} {{ state.r }} {{ state.d }}
+                            {{ state.state_name }} {{ state.tc }} {{ state.tr }} {{ state.td }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+            </div>
+                <div class="container">
+                    <table class="table table-hover table-borderless table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th scope="col" style = "text-align:center"> Confirmed </th>
+                                <th scope="col" style = "text-align:center"> Recovered </th>
+                                <th scope="col" style = "text-align:center"> Deceased </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td id="tc"> </td>
+                                <td id="tr"> </td>
+                                <td id="td"> </td>
+                            </tr>
+                            <tr >
+                                <td id="confirm"> &#8593; </td>
+                                <td id="recover"> &#8593; </td>
+                                <td id="decease"> &#8593; </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id='bottom' class="row">
+            <div class="col-lg-12">
+                <!-- <figure class="figure">
+                    <img src="{% static "images/area.jpg" %}" class="area figure-img img-fluid img-thumbnail rounded" alt="...">
+                    <figcaption class="pie-caption figure-caption text-right"> Overall Trend of Cases in India </figcaption>
+                </figure> -->
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:area' %}" height="525" width="100%">
+                </iframe>
+                <!-- <img class='area img-thumbnail rounded' src="{% static "images/area.jpg" %}" alt="">  -->
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="{% static "js/temp.js" %}"></script>
+</body>
+
+</html>
