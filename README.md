@@ -16,5 +16,5 @@
 
 **Images:**
  ![pie](Images/pie_image.png)
- ![area](Images/area.png)
+ ![area](Images/area_image.png)
     
