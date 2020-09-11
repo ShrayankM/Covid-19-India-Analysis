@@ -15,6 +15,6 @@
 **License:** MIT LICENSE.
 
 **Images:**
- ![pie](Images/pie_image.png)
+ ![pie](Images/pie_image_new.png)
  ![area](Images/area_image.png)
     
