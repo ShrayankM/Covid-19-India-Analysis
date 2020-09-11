@@ -11,10 +11,10 @@
 
 **Credits:**
    * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
+   * The website can be found live at http://s76.pythonanywhere.com/
 
 **License:** MIT LICENSE.
 
-**Images:**
  ![pie](Images/pie_image_new.png)
  ![area](Images/area_image.png)
     
