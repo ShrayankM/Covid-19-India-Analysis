@@ -8,3 +8,8 @@
    * After creating virtual environments, install all package requirements from **_requirements.txt_ ($ pip install -r requirements.txt)** present in **Coronavirus Statics India** folder.
    * Clone the project in your personal directory, and change directory to website folder.
    * Run the project using following django command **($ python manage.py runserver)**. _Make sure your are in virtual environment_
+
+**Credits:**
+   * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
+**License:** MIT LICENSE.
+    
