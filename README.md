@@ -13,4 +13,8 @@
    * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
 
 **License:** MIT LICENSE.
+
+**Images:**
+ ![pie](Images/pie_image.png)
+ ![area](Images/area_image.png)
     
