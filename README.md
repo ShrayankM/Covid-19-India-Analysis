@@ -1,3 +1,3 @@
 # Covid-19 India Analysis
-Analysis of Covid-19 Cases in India
+## Description: The project includes a number of _Jupyter notebooks_ on Coronavirus Stats in India and a the info is also represented using a **Django website**.
 
