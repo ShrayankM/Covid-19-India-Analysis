@@ -3,7 +3,7 @@
 
 **Installation:** 
 1. Jupyter notebooks can be directly run using [Google Colaboratory](https://colab.research.google.com/).
-2. To run the Django website you will have to [install django](https://docs.djangoproject.com/en/3.1/topics/install/).
+2. To run the website you will have to [install django](https://docs.djangoproject.com/en/3.1/topics/install/).
    * After installing django, I recommend to create a virtual environment for your project, using this command. **Linux/MAC command ($ python3 -m venv _virtual_enviroment_name_)**
    * After creating virtual environments, install all package requirements from **_requirements.txt_ ($ pip install -r requirements.txt)** present in **Coronavirus Statics India** folder.
    * Clone the project in your personal directory, and change directory to website folder.
@@ -11,5 +11,6 @@
 
 **Credits:**
    * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
+
 **License:** MIT LICENSE.
     
