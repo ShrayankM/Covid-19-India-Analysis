@@ -9,16 +9,16 @@ The project includes a number of _Jupyter notebooks_ on Coronavirus Statistics i
 2. To run the website you will have to [install django](https://docs.djangoproject.com/en/3.1/topics/install/).
    * After installing django, I recommend to create a virtual environment for your project, using this command.
    ```bash
-   ($ python3 -m venv _virtual_enviroment_name_)
+   $ python3 -m venv _virtual_enviroment_name_
    ```
    * After creating virtual environments, install all package requirements from **_requirements.txt_** present in **Coronavirus Statistics India** folder.
    ```bash
-   ($ pip install -r requirements.txt)
+   $ pip install -r requirements.txt
    ``` 
    * Clone the project in your personal directory, and change directory to website folder.
    * Run the project using following django command 
    ```bash
-   ($ python manage.py runserver)
+   $ python manage.py runserver
    ```
    _Make sure your are in virtual environment_
    * The project will be available at **127.0.0.1:8000**.
