@@ -171,6 +171,7 @@ def create_dataset(df):
     df_bar.drop('date', axis = 1, inplace = True)
     df_bar.drop('tt', axis = 1, inplace = True)
     df_bar.drop('un', axis = 1, inplace = True)
+    df_bar.drop('dateymd', axis = 1, inplace = True)
     df_bar = df_bar.apply(pd.to_numeric)
     df_bar = df_bar.T
     return df_bar
@@ -179,6 +180,7 @@ def overall_info(df):
     df_states = df.copy(deep = True)
     df_states['date'] = pd.to_datetime(df_states['date'])
     df_states.drop('tt', axis = 1, inplace = True)
+    df_states.drop('dateymd', axis = 1, inplace = True)
     ########## ALL States Confirmed Data #############################
     df_C = df_states[df_states['status'] == 'Confirmed'].copy(deep = True)
     df_C.drop('status', axis = 1, inplace = True)
