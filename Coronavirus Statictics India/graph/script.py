@@ -140,7 +140,7 @@ def create_line_chart(df, dir, tdir):
                              )),
                              name="Deceased", line_shape='spline'))
 
-    fig.update_traces(hoverinfo='text+y', mode='lines+markers')
+    fig.update_traces(hoverinfo='text+y+x', mode='lines+markers')
     fig.update_layout(
         xaxis_title = 'Months',
         yaxis_title = 'Cases',
