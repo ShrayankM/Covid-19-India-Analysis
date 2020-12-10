@@ -40,3 +40,16 @@ function storeData(){
         stateINFO[str] = L.reverse();
     }
 }
+
+// const activeBtn = document.querySelector('.btn-active');
+// const activeStats = document.querySelector('.active-stats');
+
+// activeBtn.addEventListener('mouseover', function() {
+//     activeBtn.classList.add('hidden');
+//     activeStats.classList.remove('hidden');
+// })
+
+// activeBtn.addEventListener('mouseout', function() {
+//     activeBtn.classList.remove('hidden');
+//     activeStats.classList.add('hidden');
+// })
