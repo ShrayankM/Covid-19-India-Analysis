@@ -7,6 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/temp.css" %}">
     <title> Coronavirus Statistics India 2020 </title>
 </head>
@@ -19,22 +24,87 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div>
         <div id='upper' class="row">
-            <div class="col-md-6 col-lg-6">
-                <!-- <figure class="figure">
-                    <img src="{% static "images/pie.jpg" %}" class="pie figure-img img-fluid img-thumbnail rounded" alt="...">
-                    <figcaption class="pie-caption figure-caption text-right"> Recovery % of India </figcaption>
-                </figure> -->
-                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:pie' %}" height="525" width="100%">
-                </iframe>
-                <!-- <img class='pie img-fluid img-thumbnail rounded' src="{% static "images/pie.jpg" %}" alt=""> -->
+            <div class="col-md-6 col-lg-6 left-upper-area">
+                <h2> Top 5 States </h2>
+                <!-- <iframe id="igraph" class = "india-map" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:pie' %}" height="525" width="100%">
+                </iframe> -->
+                <table class = "table table-hover table-borderless table-responsive-md table-style">
+                    <colgroup>
+                        <col class = "conf-col">
+                        <col class = "reco-col">
+                        <col class = "dece-col">
+                      </colgroup>
+                    <thead>
+                        <tr>
+                            <td style="border-top-left-radius: 5px; font-weight: bold;"> Confirmed </td>
+                            <td style="font-weight: bold;"> Recovered </td>
+                            <td style="border-top-right-radius: 5px; font-weight: bold;"> Deceased </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ tabular_table.Confirmed.0 }} </td>
+                            <td> {{ tabular_table.Recovered.0 }} </td>
+                            <td> {{ tabular_table.Deceased.0 }} </td>
+                        </tr>
+
+                        <tr>
+                            <td> {{ tabular_table.Confirmed.1 }} </td>
+                            <td> {{ tabular_table.Recovered.1 }} </td>
+                            <td> {{ tabular_table.Deceased.1 }} </td>
+                        </tr>
+
+                        <tr>
+                            <td> {{ tabular_table.Confirmed.2 }} </td>
+                            <td> {{ tabular_table.Recovered.2 }} </td>
+                            <td> {{ tabular_table.Deceased.2 }} </td>
+                        </tr>
+
+                        <tr>
+                            <td> {{ tabular_table.Confirmed.3 }} </td>
+                            <td> {{ tabular_table.Recovered.3 }} </td>
+                            <td> {{ tabular_table.Deceased.3 }} </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border-bottom-left-radius: 5px"> {{ tabular_table.Confirmed.4 }} </td>
+                            <td> {{ tabular_table.Recovered.4 }} </td>
+                            <td style="border-bottom-right-radius: 5px"> {{ tabular_table.Deceased.4 }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class = "table table-hover table-borderless table-responsive-md table-style stats-table">
+                    <thead>
+                        <tr>
+                            <th> 
+                                <button class = "btn btn-warning btn-active"> 
+                                    Active <span class="badge badge-light"> {{ percentage_table.0 }}%  </span>
+                                </button> 
+                            </th>
+                            <th> 
+                                <button class = "btn btn-success"> 
+                                    Recovery <span class="badge badge-light"> {{ percentage_table.1 }}%  </span>
+                                </button> 
+                            </th>
+                            <th> 
+                                <button class = "btn btn-danger"> 
+                                    Deceased <span class="badge badge-light"> {{ percentage_table.0 }}%  </span>
+                                </button> 
+                            </th>
+                            <!-- <th> Recovery {{ percentage_table.1 }}%</th>
+                            <th> Deceased {{ percentage_table.2 }}%</th> -->
+                        </tr>
+                    </thead>
+                </table>
             </div>
             <div class="col-md-6 col-lg-6">
-                <div class="container">
+                <div class = "container">
                     <h2> Across India &#8593;</h2>
                     {% if overall_list and today_t %}
-                        <table class="tab table table-hover table-borderless table-responsive-md">
+                        <table class="table table-hover table-borderless table-responsive-md table-style">
                             <thead>
                                 <tr>
                                     <!-- <th scope="col"> </th> -->
@@ -66,12 +136,12 @@
                     {% endfor %}
                 {% endif %} -->
                 <div class="bd-example">
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <div id="select-head" class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01"> States Data </label>
                     </div>
                     {% if state_table %}
-                    <select id="state_select" class="custom-select" id="inputGroupSelect01">
+                    <select id="state_select" class="custom-select" id="inputGroupSelect01" style = "width: 35%">
                         {% for state in state_table %}
                         <option value=""> {{ state.name }} </option>
                         {% endfor %}
@@ -87,7 +157,7 @@
                 </div>
             </div>
                 <div class="container">
-                    <table class="table table-hover table-borderless table-responsive-md">
+                    <table class="table table-hover table-borderless table-responsive-md table-style">
                         <thead>
                             <tr>
                                 <th scope="col" style = "text-align:center"> Confirmed </th>
@@ -114,13 +184,8 @@
 
         <div id='bottom' class="row">
             <div class="col-lg-12">
-                <!-- <figure class="figure">
-                    <img src="{% static "images/area.jpg" %}" class="area figure-img img-fluid img-thumbnail rounded" alt="...">
-                    <figcaption class="pie-caption figure-caption text-right"> Overall Trend of Cases in India </figcaption>
-                </figure> -->
-                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:area' %}" height="525" width="100%">
+                <iframe id="igraph" class = "line-chart" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:area' %}" height="590" width="100%">
                 </iframe>
-                <!-- <img class='area img-thumbnail rounded' src="{% static "images/area.jpg" %}" alt="">  -->
             </div>
         </div>
     </div>
