@@ -6,6 +6,8 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
+import math
+
 # from matplotlib import style
 
 import urllib.request
@@ -57,8 +59,8 @@ def create_pie_chart(df, dir, tdir):
     colors.append(px.colors.qualitative.G10[3])
 
     fig = go.Figure(data=[go.Pie(labels=['Active', 'Deceased', 'Recovered'],
-                                 values=df_g['tt'], pull=[0.1, 0, 0], rotation = 180,
-                                 title = {'text' : 'Recovery Rate India',  'position' : 'bottom right',
+                                 values=df_g['tt'], pull=[0, 0, 0], rotation = 180,
+                                 title = {'text' : 'Recovery Rate India',  'position' : 'top left',
                                           'font': {'size' : 20}},
                                  showlegend = True)])
     fig.update_traces(hoverinfo='label+value', textinfo='percent', textfont_size=15,
@@ -115,7 +117,7 @@ def create_line_chart(df, dir, tdir):
     fig.add_trace(go.Scatter(x= df_conf['date'], y = df_conf['tt'],
                              mode='markers',
                              marker=dict(
-                             color=colors[0],
+                             color='#F69A30',
                              line=dict(
                                 color='black',
                                 width=0.2
@@ -124,7 +126,7 @@ def create_line_chart(df, dir, tdir):
     fig.add_trace(go.Scatter(x= df_rec['date'], y = df_rec['tt'],
                              mode='markers',
                              marker=dict(
-                             color=colors[2],
+                             color='#387938',
                              line=dict(
                                 color='black',
                                 width=0.2
@@ -133,7 +135,7 @@ def create_line_chart(df, dir, tdir):
     fig.add_trace(go.Scatter(x= df_dec['date'], y = df_dec['tt'],
                              mode='markers',
                              marker=dict(
-                             color=colors[1],
+                             color='#B2322B',
                              line=dict(
                                 color='black',
                                 width=0.2
@@ -155,8 +157,8 @@ def create_line_chart(df, dir, tdir):
         margin=dict(
             l=0,
             r=0,
-            b=50,
-            t=50,
+            b=20,
+            t=10,
             pad=0
         ),)
 
@@ -212,6 +214,131 @@ def overall_info(df):
     df_MD = df_MD['Deceased']
     ##################################################################
     return df_MC, df_MR, df_MD
+state_dict = {
+    'AP' : 'Andhra Pradesh',
+    'AR' : 'Arunanchal Pradesh',
+	'AS' : 'Assam',
+	'BR' : 'Bihar',
+	'CT' : 'Chhattisgarh',
+	'GA' : 'Goa',
+	'GJ' : 'Gujarat',
+ 	'HR' : 'Haryana',
+	'HP' : 'Himachal Pradesh',
+	'JH' : 'Jharkhand',
+	'KA' : 'Karnataka',
+	'KL' : 'Kerala',
+	'MP' : 'Madhya Pradesh',
+	'MH' : 'Maharashtra',
+	'MN' : 'Manipur',
+	'ML' : 'Meghalaya',
+	'MZ' : 'Mizoram',
+	'NL' : 'Nagaland',
+	'OR' : 'Odisha',
+	'PB' : 'Punjab',
+	'RJ' : 'Rajasthan',
+	'SK' : 'Sikkim',
+	'TN' : 'Tamil Nadu',
+	'TR' : 'Tripura',
+	'UP' : 'Uttar Pradesh',
+	'UT' : 'Uttarakhand',
+	'WB' : 'West Bengal',
+	'TG' : 'Telangana',
+	'AN' : 'Andaman & Nicobar Island',
+	'CH' : 'Chandigarh',
+	'DN' : 'Dadara & Nagar Havelli',
+	'DD' : 'Daman & Diu',
+	'JK' : 'Jammu & Kashmir',
+	'LA' : 'Ladakh',
+	'LD' : 'Lakshadweep',
+	'DL' : 'NCT of Delhi',
+	'PY' : 'Puducherry' 
+}
+
+def update_state_name(state):
+    state = state.upper()
+    return state_dict[state]
+
+def getForStatus(data, status_value):
+    df = data[data['status'] == status_value].copy(deep = True)
+    df.drop('status', axis = 1, inplace = True)
+    df.drop('tt', axis = 1, inplace = True)
+    df.drop('un', axis = 1, inplace = True)
+    temp_date = df['dateymd']
+    df.drop('dateymd', axis = 1, inplace = True)
+    df = df.apply(pd.to_numeric)
+    df['dateymd'] = pd.to_datetime(temp_date)
+
+    df = pd.melt(df, id_vars = 'dateymd', 
+                         value_vars = list(df.columns).remove('dateymd'), 
+                         var_name = 'state', value_name = status_value)
+    df = df.groupby('state').sum()
+
+    df['state_name'] = [update_state_name(x) for x in df.index]
+    return df
+
+def return_arr(df, status):
+    arr = []
+    for x, y in df.iterrows():
+        arr.append(y['state_name'] + " (" + str(y[status]) + ")")
+    return arr
+
+def generate_table(data):
+    data.drop('date', axis = 1, inplace = True)
+    today_data = data.tail(3)
+    data = today_data.copy(deep = True)
+    today_confirmed = getForStatus(data, "Confirmed")
+    today_recovered = getForStatus(data, "Recovered")
+    today_deceased = getForStatus(data, "Deceased")
+
+    today_confirmed.sort_values('Confirmed', ascending = False, inplace = True)
+    today_recovered.sort_values('Recovered', ascending = False, inplace = True)
+    today_deceased.sort_values('Deceased', ascending = False, inplace = True)
+
+    today_confirmed_top = today_confirmed.head(5)
+    today_recovered_top = today_recovered.head(5)
+    today_deceased_top = today_deceased.head(5)
+
+    conf_arr = return_arr(today_confirmed_top, 'Confirmed')
+    reco_arr = return_arr(today_recovered_top, 'Recovered')
+    dece_arr = return_arr(today_deceased_top, 'Deceased')
+
+    tabular_dataframe = {'Confirmed': conf_arr, 'Recovered': reco_arr, 'Deceased': dece_arr}
+    df = pd.DataFrame(data = tabular_dataframe)
+    return df
+
+def append_count(df, type):
+    return df[type].sum()
+
+def get_percentage(total, value):
+    return round((value/total) * 100, 2)
+
+def percentage_info(data):
+
+    # today_data = data.tail(3)
+    # count_today = np.array(today_data['tt'], dtype=int)
+
+    data_confirmed = getForStatus(data, 'Confirmed')
+    data_recovered = getForStatus(data, 'Recovered')
+    data_deceased = getForStatus(data, 'Deceased')
+
+    count_arr = []
+    count_arr.append(append_count(data_confirmed, 'Confirmed'));
+    count_arr.append(append_count(data_recovered, 'Recovered'));
+    count_arr.append(append_count(data_deceased, 'Deceased'));
+
+    count_arr[0] = count_arr[0] - count_arr[1]
+    count_arr[0] = count_arr[0] - count_arr[2]
+    total_cnt = 0
+
+    for x in count_arr:
+        total_cnt += x
+
+    print(count_arr)
+
+    count_arr = [get_percentage(total_cnt, x) for x in count_arr]
+    # count_today = [get_percentage(np.sum(count_today), x) for x in count_today]
+    return count_arr
+
 
 def start():
     urllib.request.urlretrieve(url, 'data.json');
@@ -221,11 +348,13 @@ def start():
     BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
     STATIC_DIR = os.path.join(BASE_DIR, 'static')
     TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-    create_pie_chart(df, STATIC_DIR, TEMPLATE_DIR)
+    # create_pie_chart(df, STATIC_DIR, TEMPLATE_DIR)
     create_line_chart(df, STATIC_DIR, TEMPLATE_DIR)
     df_bar = create_dataset(df)
     df_MC, df_MR, df_MD = overall_info(df)
-    return df_bar, df_MC, df_MR, df_MD
+    df_table = generate_table(df)
+    df_perc = percentage_info(df)
+    return df_bar, df_MC, df_MR, df_MD, df_table, df_perc
 
 start()
 # if __name__ == '__main__':

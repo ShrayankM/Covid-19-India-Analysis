@@ -6,5 +6,7 @@ app_name = 'graph'
 
 urlpatterns = [
     path('pie/', views.pie, name = 'pie'),
-    path('area/', views.area, name = 'area')
+    path('area/', views.area, name = 'area'),
+    path('bar/', views.bar, name = 'bar'),
+    path('india_map/', views.india_map, name = 'india'),
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from graph import script
+from graph import map_script
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 # from graph.models import StateInfo
@@ -72,13 +73,16 @@ def insert_data(df, c, r, d):
     return state_list, total_list, today_total
 
 
+# def temp(request):
+# 	return render(request, 'graph/temp.html');
+
 
 def temp(request):
-    [df, df_MC, df_MR, df_MD] = script.start()
+    [df, df_MC, df_MR, df_MD, df_table, df_perc] = script.start()
     state_list, total_list, today_total = insert_data(df, df_MC, df_MR, df_MD)
     # total_list = tInfo(df, df_MC, df_MR, df_MD)
     # print(total_list)
-    my_dict = {'state_table' : state_list, 'overall_list' : total_list, 'today_t' : today_total}
+    my_dict = {'state_table' : state_list, 'overall_list' : total_list, 'today_t' : today_total, 'tabular_table': df_table, 'percentage_table': df_perc}
     return render(request, 'graph/temp.html', context = my_dict)
 
 
@@ -87,3 +91,10 @@ def pie(request):
 
 def area(request):
     return render(request, 'graph/area_chart.html')
+
+def bar(request):
+	return render(request, 'graph/bar_chart.html')
+
+def india_map(request):
+	map_script.start()
+	return render(request, 'graph/india_confirmed.html')
