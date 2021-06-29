@@ -15,13 +15,13 @@ $( "#state_select" ).change(function () {
     var temp = strip(str)
     var state_details = String(stateINFO[temp])
     state_details = state_details.split(',')
-    $('#confirm').text(state_details[0].concat('\u2191'))
-    $('#recover').text(state_details[1].concat('\u2191'))
-    $('#decease').text(state_details[2].concat('\u2191'))
+    $('#confirm').text(new Intl.NumberFormat('en-IN').format(state_details[0]).concat('\u2191'));
+    $('#recover').text(new Intl.NumberFormat('en-IN').format(state_details[1]).concat('\u2191'))
+    $('#decease').text(new Intl.NumberFormat('en-IN').format(state_details[2]).concat('\u2191'))
 
-    $('#tc').text(state_details[3])
-    $('#tr').text(state_details[4])
-    $('#td').text(state_details[5])
+    $('#tc').text(new Intl.NumberFormat('en-IN').format(state_details[3]))
+    $('#tr').text(new Intl.NumberFormat('en-IN').format(state_details[4]))
+    $('#td').text(new Intl.NumberFormat('en-IN').format(state_details[5]))
 
   }).change();
 
@@ -41,15 +41,25 @@ function storeData(){
     }
 }
 
-// const activeBtn = document.querySelector('.btn-active');
-// const activeStats = document.querySelector('.active-stats');
+const indiaDate = document.querySelector('.india__date');
+const day = `${(new Date()).getDate()}`.padStart(2, '0');
+const month = `${(new Date()).getMonth() + 1}`.padStart(2, '0');
+const year = (new Date()).getFullYear();
 
-// activeBtn.addEventListener('mouseover', function() {
-//     activeBtn.classList.add('hidden');
-//     activeStats.classList.remove('hidden');
-// })
+// console.log(day, month, year);
+indiaDate.textContent = `${indiaDate.textContent} (${day}/${month}/${year})`;
 
-// activeBtn.addEventListener('mouseout', function() {
-//     activeBtn.classList.remove('hidden');
-//     activeStats.classList.add('hidden');
-// })
+const arr = document.querySelectorAll('.overall');
+// console.log(arr);
+
+arr.forEach(function(element) {
+    element.innerHTML = `${new Intl.NumberFormat('en-IN').format(element.innerHTML)}`;
+})
+
+
+const overToday = document.querySelectorAll('.over-today');
+overToday.forEach(function(element) {
+    // console.log(element.innerHTML.replaceAll(' ', ''));
+    const str = element.innerHTML.replaceAll(' ', '');
+    element.innerHTML = `${new Intl.NumberFormat('en-IN').format(str.slice(0, -1))} ${str.slice(-1)}`;
+})
