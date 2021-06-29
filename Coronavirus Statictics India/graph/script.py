@@ -251,7 +251,7 @@ state_dict = {
 	'LA' : 'Ladakh',
 	'LD' : 'Lakshadweep',
 	'DL' : 'NCT of Delhi',
-	'PY' : 'Puducherry' 
+	'PY' : 'Puducherry'
 }
 
 def update_state_name(state):
@@ -268,8 +268,8 @@ def getForStatus(data, status_value):
     df = df.apply(pd.to_numeric)
     df['dateymd'] = pd.to_datetime(temp_date)
 
-    df = pd.melt(df, id_vars = 'dateymd', 
-                         value_vars = list(df.columns).remove('dateymd'), 
+    df = pd.melt(df, id_vars = 'dateymd',
+                         value_vars = list(df.columns).remove('dateymd'),
                          var_name = 'state', value_name = status_value)
     df = df.groupby('state').sum()
 
@@ -333,11 +333,12 @@ def percentage_info(data):
     for x in count_arr:
         total_cnt += x
 
-    print(count_arr)
+    #print(count_arr)
+    current_active = count_arr[0]
 
     count_arr = [get_percentage(total_cnt, x) for x in count_arr]
     # count_today = [get_percentage(np.sum(count_today), x) for x in count_today]
-    return count_arr
+    return count_arr, current_active
 
 
 def start():
@@ -348,14 +349,14 @@ def start():
     BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
     STATIC_DIR = os.path.join(BASE_DIR, 'static')
     TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-    # create_pie_chart(df, STATIC_DIR, TEMPLATE_DIR)
+    create_pie_chart(df, STATIC_DIR, TEMPLATE_DIR)
     create_line_chart(df, STATIC_DIR, TEMPLATE_DIR)
     df_bar = create_dataset(df)
     df_MC, df_MR, df_MD = overall_info(df)
     df_table = generate_table(df)
-    df_perc = percentage_info(df)
-    return df_bar, df_MC, df_MR, df_MD, df_table, df_perc
+    df_perc, current_active = percentage_info(df)
+    return df_bar, df_MC, df_MR, df_MD, df_table, df_perc, current_active
 
-start()
+#start()
 # if __name__ == '__main__':
 #     start()
