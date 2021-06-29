@@ -30,6 +30,5 @@ The project includes a number of _Jupyter notebooks_ on Coronavirus Statistics i
 ## License: 
    * [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
- ![tables](Images/tabs.png)
- ![area](Images/area.png)
+![covidsite_gif](Images/t2.gif)
     
