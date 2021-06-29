@@ -27,7 +27,7 @@
     <div>
         <div id='upper' class="row">
             <div class="col-md-6 col-lg-6 left-upper-area">
-                <h2> Top 5 States </h2>
+                <h2> Top 5 States - Active Cases ({{ current_active }}) </h2>
                 <!-- <iframe id="igraph" class = "india-map" scrolling="no" style="border:none;" seamless="seamless" src="{% url 'graph:pie' %}" height="525" width="100%">
                 </iframe> -->
                 <table class = "table table-hover table-borderless table-responsive-md table-style">
@@ -79,20 +79,20 @@
                 <table class = "table table-hover table-borderless table-responsive-md table-style stats-table">
                     <thead>
                         <tr>
-                            <th> 
-                                <button class = "btn btn-warning btn-active"> 
+                            <th>
+                                <button class = "btn btn-warning btn-active">
                                     Active <span class="badge badge-light"> {{ percentage_table.0 }}%  </span>
-                                </button> 
+                                </button>
                             </th>
-                            <th> 
-                                <button class = "btn btn-success"> 
+                            <th>
+                                <button class = "btn btn-success">
                                     Recovery <span class="badge badge-light"> {{ percentage_table.1 }}%  </span>
-                                </button> 
+                                </button>
                             </th>
-                            <th> 
-                                <button class = "btn btn-danger"> 
+                            <th>
+                                <button class = "btn btn-danger">
                                     Deceased <span class="badge badge-light"> {{ percentage_table.0 }}%  </span>
-                                </button> 
+                                </button>
                             </th>
                             <!-- <th> Recovery {{ percentage_table.1 }}%</th>
                             <th> Deceased {{ percentage_table.2 }}%</th> -->
@@ -102,7 +102,7 @@
             </div>
             <div class="col-md-6 col-lg-6">
                 <div class = "container">
-                    <h2> Across India &#8593;</h2>
+                    <h2 class="india__date"> Across India &#8593;</h2>
                     {% if overall_list and today_t %}
                         <table class="table table-hover table-borderless table-responsive-md table-style">
                             <thead>
@@ -116,15 +116,15 @@
                             <tbody>
                                 <tr>
                                     <!-- <th scope="row"> Total </th> -->
-                                    <td style="color:#D32828; font-weight:bold; text-align:center"> {{ overall_list.0 }} </td>
-                                    <td style="color:#2BA02D; font-weight:bold; text-align:center"> {{ overall_list.1 }} </td>
-                                    <td style = "font-weight:bold; text-align:center"> {{ overall_list.2 }} </td>
+                                    <td class = "overall" style="color:#D32828; font-weight:bold; text-align:center"> {{ overall_list.0 }} </td>
+                                    <td class = "overall" style="color:#2BA02D; font-weight:bold; text-align:center"> {{ overall_list.1 }} </td>
+                                    <td class = "overall" style = "font-weight:bold; text-align:center"> {{ overall_list.2 }} </td>
                                 </tr>
                                 <tr>
                                     <!-- <th scope="row"> Today </th> -->
-                                    <td style="color:#D32828; font-weight:bold; text-align:center"> {{ today_t.0 }} &#8593; </td>
-                                    <td style="color:#2BA02D; font-weight:bold; text-align:center"> {{ today_t.1 }} &#8593; </td>
-                                    <td style = "font-weight:bold; text-align:center"> {{ today_t.2 }} &#8593; </td>
+                                    <td class = "over-today" style="color:#D32828; font-weight:bold; text-align:center"> {{ today_t.0 }} &#8593; </td>
+                                    <td class = "over-today" style="color:#2BA02D; font-weight:bold; text-align:center"> {{ today_t.1 }} &#8593; </td>
+                                    <td class = "over-today" style = "font-weight:bold; text-align:center"> {{ today_t.2 }} &#8593; </td>
                                 </tr>
                             </tbody>
                         </table>
