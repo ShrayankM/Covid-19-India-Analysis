@@ -24,6 +24,7 @@ The project includes a number of _Jupyter notebooks_ on Coronavirus Statistics i
    * The project will be available at **127.0.0.1:8000**.
 
 ## Credits:
+   * Data avaliable at the following API documentation https://data.covid19india.org/
    * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
    * The website can be found live at http://s76.pythonanywhere.com/
 
