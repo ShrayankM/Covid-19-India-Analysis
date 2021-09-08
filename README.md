@@ -25,7 +25,7 @@ The project includes a number of _Jupyter notebooks_ on Coronavirus Statistics i
 
 ## Credits:
    * Data avaliable at the following API documentation https://data.covid19india.org/
-   * Data has been used from the following api (url = "https://api.covid19india.org/states_daily.json").
+   * Data has been used from the following api (url = "https://data.covid19india.org/csv/latest/state_wise_daily.csv").
    * The website can be found live at http://s76.pythonanywhere.com/
 
 ## License: 
